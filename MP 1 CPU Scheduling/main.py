@@ -179,10 +179,12 @@ def strf(): #Shortest Remaining Time First
                 
                 if(buffer != active):
                     ready.append(buffer)
+                    ready.remove(active)
                     gantt.append(str(t))
                     gantt.append(active.name)
 
-                    if(active.response == 0): active.response = (t - active.arrival)
+                    if(active.remaining == active.burst): 
+                        active.response = (t - active.arrival)
 
             
         if (len(ready) != 0 and active == None):
@@ -197,11 +199,13 @@ def strf(): #Shortest Remaining Time First
             
             ready.remove(active)
             gantt.append(active.name)
-            active.response = (t - active.arrival)
+            if(active.remaining == active.burst): 
+                active.response = (t - active.arrival)
 
         t += 1
 
     print("Gantt")
+    print(0)
     for x in gantt:
         print(x)
 
