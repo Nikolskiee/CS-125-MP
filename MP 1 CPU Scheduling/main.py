@@ -348,6 +348,85 @@ def pp():
     for x in processes:
         print(x.name, "\t", x.burst, "\t", x.arrival, "\t", x.completion, "\t", x.response, "\t", x.waiting, "\t", x.turnaround)
 
+def rr():
+    count = int(input("Enter the number of processes: "))
+    quantum = int(input("Enter the time quantum: "))
+    i = 1
+    time = 0
+    processes = []
+    while(i <= count):
+        name = "P" + str(i)
+        print(name)
+        priority = i
+        arrival = int(input("Arrival time: "))
+        burst = int(input("Burst time: "))
+        time += burst
+        
+        process = Process(name, priority, arrival, burst)
+        processes.append(process)
+        i = i + 1
+
+    t = 0 #time
+    q = 0 #time quantum
+    ready = [] #ready queue
+    active = None
+    gantt = [] #Gantt Chart
+
+    while (t <= time):
+        if (len(ready) != 0):
+            for x in ready:
+                x.waiting += 1
+        
+        for x in processes:
+            if (x.arrival == t):
+                ready.append(x)
+
+        if(active != None):
+            active.remaining -= 1
+            if (active.remaining == 0):
+                active.completion = t
+                active.turnaround = active.completion - active.arrival
+                active = None
+                gantt.append(str(t))
+                q = 0
+            elif (q == quantum):
+                buffer = active
+                if(len(ready) != 0):
+                    active = ready[0]
+                
+                if(buffer != active):
+                    ready.append(buffer)
+                    ready.remove(active)
+                    gantt.append(str(t))
+                    gantt.append(active.name)
+
+                    if(active.remaining == active.burst): 
+                        active.response = (t - active.arrival)
+                    
+                
+                q = 0
+            
+        if (len(ready) != 0 and active == None):
+            active = ready[0]
+            
+            ready.remove(active)
+            gantt.append(active.name)
+            if(active.burst == active.remaining): 
+                active.response = (t - active.arrival)
+            
+            q = 0
+        
+        t += 1
+        q += 1
+
+    print("Gantt")
+    print(0)
+    for x in gantt:
+        print(x)
+
+    print("Pro \t Bur \t Arr \t Com \t Res \t Wai \t Tur")
+    for x in processes:
+        print(x.name, "\t", x.burst, "\t", x.arrival, "\t", x.completion, "\t", x.response, "\t", x.waiting, "\t", x.turnaround)
 
 def main():
     print("CPU Process Scheduling")
@@ -378,6 +457,8 @@ def main():
         pnp()
     if(choice == 5):
         pp()
+    if(choice == 6):
+        rr()
     
     print("CPU Process Scheduling")
     print("by: Ivan Baluyut & Nichol Famadico")
