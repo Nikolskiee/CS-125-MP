@@ -10,7 +10,7 @@ def fifo(): #First In First Out
 
     while(True):
         try:
-            x = int(input("Input a frame (Enter nothing to stop): "))
+            x = int(input("Input a reference (Enter nothing to stop): "))
             reference.append(x)
         except:
             break
@@ -33,7 +33,7 @@ def fifo(): #First In First Out
             faults.append(copy)
             fc +=1 
 
-            if (fc == 3):
+            if (fc == frames):
                 fc = 0
             rc += 1
             pc += 1
@@ -62,13 +62,14 @@ def lru(): #Least Recently Used
 
     while(True):
         try:
-            x = int(input("Input a frame (Enter nothing to stop): "))
+            x = int(input("Input a reference (Enter nothing to stop): "))
             reference.append(x)
         except:
             break
     
     rc = 0
     pc = 0
+    fc = 0
     
     while rc < len(reference):
         if reference[rc] in page:
@@ -78,8 +79,9 @@ def lru(): #Least Recently Used
             faults.append(copy)
             rc += 1
         else:
-            if (rc < frames):
-                page[rc] = reference[rc]
+            if (fc < frames):
+                page[fc] = reference[rc]
+                fc += 1
             else:
                 replace = page[0]
                 farthest = 0
@@ -120,15 +122,177 @@ def lru(): #Least Recently Used
         x += 1
     print("The reference string resulted in", str(pc),"page faults.")
 
+def lfu(): #Least Frequently Used
+    frames = int(input("Enter the number of frames: "))
+    faults = []
+    page = []
+    
+    for x in range (0, frames):
+        page.append("")
+
+    reference = []
+
+    while(True):
+        try:
+            x = int(input("Input a reference (Enter nothing to stop): "))
+            reference.append(x)
+        except:
+            break
+    
+    rc = 0
+    pc = 0
+    fc = 0
+
+    history = []
+    
+    while rc < len(reference):
+        if reference[rc] in page:
+            copy = []
+            for x in range(0, frames):
+                copy.append("")
+            faults.append(copy)
+            rc += 1
+        else:
+            if (fc < frames):
+                page[fc] = reference[rc]
+                fc += 1
+            else:
+                i = 0
+                span =[]
+
+                while (i < rc):
+                    span.append(reference[i])
+                    i += 1
+                
+                replace = page[0]
+                least = span.count(replace)
+
+                for x in page:
+                    i = span.count(x)
+                    if(i < least):
+                        replace = x
+                        least = i
+                    elif (i == least):
+                        y = len(history) - 1
+                        while (y >= 0):
+                            if(not (x in history[y])):
+                                break
+                            if(not (replace in history[y])):
+                                replace = x
+                                least = i
+                                break
+                            y -= 1
+
+                page[page.index(replace)] = reference[rc]
+
+            copy = page.copy()
+            faults.append(copy)
+            history.append(copy)
+            rc += 1
+            pc += 1
+    
+
+    x = 0
+    string = ""
+    while x < len(reference):
+        string = str(reference[x]) + "\t\t"
+        for y in faults[x]:
+            string += str(y) + "\t"
+        
+        print(string)
+        x += 1
+    print("The reference string resulted in", str(pc),"page faults.")
+
+def mfu():
+    frames = int(input("Enter the number of frames: "))
+    faults = []
+    page = []
+    
+    for x in range (0, frames):
+        page.append("")
+
+    reference = []
+
+    while(True):
+        try:
+            x = int(input("Input a reference (Enter nothing to stop): "))
+            reference.append(x)
+        except:
+            break
+    
+    rc = 0
+    pc = 0
+    fc = 0
+
+    history = []
+    
+    while rc < len(reference):
+        if reference[rc] in page:
+            copy = []
+            for x in range(0, frames):
+                copy.append("")
+            faults.append(copy)
+            rc += 1
+        else:
+            if (fc < frames):
+                page[fc] = reference[rc]
+                fc += 1
+            else:
+                i = 0
+                span =[]
+
+                while (i < rc):
+                    span.append(reference[i])
+                    i += 1
+                
+                replace = page[0]
+                great = span.count(replace)
+
+                for x in page:
+                    i = span.count(x)
+                    if(i > great):
+                        replace = x
+                        great = i
+                    elif (i == great):
+                        y = len(history) - 1
+                        while (y >= 0):
+                            if(not (x in history[y])):
+                                break
+                            if(not (replace in history[y])):
+                                replace = x
+                                great = i
+                                break
+                            y -= 1
+
+                page[page.index(replace)] = reference[rc]
+
+            copy = page.copy()
+            faults.append(copy)
+            history.append(copy)
+            rc += 1
+            pc += 1
+    
+
+    x = 0
+    string = ""
+    while x < len(reference):
+        string = str(reference[x]) + "\t\t"
+        for y in faults[x]:
+            string += str(y) + "\t"
+        
+        print(string)
+        x += 1
+    print("The reference string resulted in", str(pc),"page faults.")
+
 def main():
     print("Page Replacement Algorithm")
     print("by: Ivan Baluyut & Nichol Famadico")
     choice = 0
     print("Pick a Page Replacement Algorithm")
-    print("1. FIFO")
-    print("2. LRU")
-    print("3. LFU")
-    print("4. MFU")
+    print("1. First-In-First-Out")
+    print("2. Least-Recently-Used")
+    print("3. Least-Frequently-Used")
+    print("4. Most-Frequently-Used")
     choice = int(input("Your choice is: "))
     print()
 
@@ -141,6 +305,10 @@ def main():
         fifo()
     if choice == 2:
         lru()
+    if choice == 3:
+        lfu()
+    if choice == 4:
+        mfu()
     
     
     
