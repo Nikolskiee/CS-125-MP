@@ -21,7 +21,9 @@ def fifo():
     
     while rc < len(reference):
         if reference[rc] in page:
-            copy = ["", "", ""]
+            copy = []
+            for x in range(0, frames):
+                copy.append("")
             faults.append(copy)
             rc += 1
         else:
@@ -36,8 +38,13 @@ def fifo():
     
 
     x = 0
+    string = ""
     while x < len(reference):
-        print(reference[x], "\t\t", faults[x][0], "\t", faults[x][1], "\t", faults[x][2])
+        string = str(reference[x]) + "\t\t"
+        for y in faults[x]:
+            string += str(y) + "\t"
+        
+        print(string)
         x += 1
 
 
