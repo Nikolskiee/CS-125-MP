@@ -1,4 +1,4 @@
-def fifo():
+def fifo(): #First In First Out
     frames = int(input("Enter the number of frames: "))
     faults = []
     page = []
@@ -50,7 +50,7 @@ def fifo():
         x += 1
     print("The reference string resulted in", str(pc),"page faults.")
 
-def lru():
+def lru(): #Least Recently Used
     frames = int(input("Enter the number of frames: "))
     faults = []
     page = []
@@ -68,8 +68,6 @@ def lru():
             break
     
     rc = 0
-    fc = 0
-
     pc = 0
     
     while rc < len(reference):
@@ -80,13 +78,33 @@ def lru():
             faults.append(copy)
             rc += 1
         else:
-            page[fc] = reference[rc]
+            if (rc < frames):
+                page[rc] = reference[rc]
+            else:
+                replace = page[0]
+                farthest = 0
+                i = 0
+                while (i < rc):
+                    if(reference[i] == replace):
+                        farthest = i
+                    i += 1
+                
+                for x in page:
+                    recent = 0
+                    i = 0
+                    while (i < rc):
+                        if(reference[i] == x):
+                            recent = i
+                        i += 1
+                    
+                    if (recent < farthest):
+                        replace = x
+                        farthest = recent
+
+                page[page.index(replace)] = reference[rc]
+
             copy = page.copy()
             faults.append(copy)
-            fc +=1 
-
-            if (fc == 3):
-                fc = 0
             rc += 1
             pc += 1
     
