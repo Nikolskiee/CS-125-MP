@@ -1,4 +1,3 @@
-
 def fifo():
     frames = int(input("Enter the number of frames: "))
     faults = []
@@ -18,6 +17,8 @@ def fifo():
     
     rc = 0
     fc = 0
+
+    pc = 0
     
     while rc < len(reference):
         if reference[rc] in page:
@@ -35,6 +36,7 @@ def fifo():
             if (fc == 3):
                 fc = 0
             rc += 1
+            pc += 1
     
 
     x = 0
@@ -46,8 +48,59 @@ def fifo():
         
         print(string)
         x += 1
+    print("The reference string resulted in", str(pc),"page faults.")
 
+def lru():
+    frames = int(input("Enter the number of frames: "))
+    faults = []
+    page = []
+    
+    for x in range (0, frames):
+        page.append("")
 
+    reference = []
+
+    while(True):
+        try:
+            x = int(input("Input a frame (Enter nothing to stop): "))
+            reference.append(x)
+        except:
+            break
+    
+    rc = 0
+    fc = 0
+
+    pc = 0
+    
+    while rc < len(reference):
+        if reference[rc] in page:
+            copy = []
+            for x in range(0, frames):
+                copy.append("")
+            faults.append(copy)
+            rc += 1
+        else:
+            page[fc] = reference[rc]
+            copy = page.copy()
+            faults.append(copy)
+            fc +=1 
+
+            if (fc == 3):
+                fc = 0
+            rc += 1
+            pc += 1
+    
+
+    x = 0
+    string = ""
+    while x < len(reference):
+        string = str(reference[x]) + "\t\t"
+        for y in faults[x]:
+            string += str(y) + "\t"
+        
+        print(string)
+        x += 1
+    print("The reference string resulted in", str(pc),"page faults.")
 
 def main():
     print("Page Replacement Algorithm")
@@ -68,6 +121,8 @@ def main():
 
     if choice == 1:
         fifo()
+    if choice == 2:
+        lru()
     
     
     
