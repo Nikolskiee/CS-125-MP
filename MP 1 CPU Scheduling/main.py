@@ -62,13 +62,34 @@ def fcfs(): #First Come First Serve
         
         t += 1
 
-    print("Gantt")
+    print()
+    print("The Gantt Chart")
+    pgantt = "   ______"
     for x in gantt:
-        print(x.name, x.completion)
+        pgantt = pgantt + x.name + "______"
+    print(pgantt)
 
+    tgantt = "     00\t "
+    for y in gantt:
+        if(len(str(y.completion)) == 1):
+            tgantt = tgantt + "    0" + str(y.completion) + "\t "
+        else:
+            tgantt = tgantt + "    " + str(y.completion) + "\t "
+    print(tgantt)
+
+    print()
+    print("The Table")
     print("Pro \t Bur \t Arr \t Com \t Res \t Wai \t Tur")
+    rAvr = 0
+    wAvr = 0
+    tAvr = 0
     for x in processes:
+        rAvr += x.response
+        wAvr += x.waiting
+        tAvr += x.turnaround
         print(x.name, "\t", x.burst, "\t", x.arrival, "\t", x.completion, "\t", x.response, "\t", x.waiting, "\t", x.turnaround)
+    print("AVERAGE-------------------------", rAvr/count, "\t", wAvr/count, "\t", tAvr/count)
+
 
 def sjf(): #Shortest Job First
     count = int(input("Enter the number of processes: "))
@@ -120,13 +141,34 @@ def sjf(): #Shortest Job First
         
         t += 1
 
-    print("Gantt")
+    print()
+    print("The Gantt Chart")
+    pgantt = "   ______"
     for x in gantt:
-        print(x.name, x.completion)
+        pgantt = pgantt + x.name + "______"
+    print(pgantt)
 
+    tgantt = "     00\t "
+    for y in gantt:
+        if(len(str(y.completion)) == 1):
+            tgantt = tgantt + "    0" + str(y.completion) + "\t "
+        else:
+            tgantt = tgantt + "    " + str(y.completion) + "\t "
+    print(tgantt)
+
+    print()
+    print("The Table")
     print("Pro \t Bur \t Arr \t Com \t Res \t Wai \t Tur")
+    rAvr = 0
+    wAvr = 0
+    tAvr = 0
     for x in processes:
+        rAvr += x.response
+        wAvr += x.waiting
+        tAvr += x.turnaround
         print(x.name, "\t", x.burst, "\t", x.arrival, "\t", x.completion, "\t", x.response, "\t", x.waiting, "\t", x.turnaround)
+    print("AVERAGE-------------------------", rAvr/count, "\t", wAvr/count, "\t", tAvr/count)
+
 
 def strf(): #Shortest Remaining Time First
     count = int(input("Enter the number of processes: "))
@@ -149,6 +191,7 @@ def strf(): #Shortest Remaining Time First
     ready = [] #ready queue
     active = None
     gantt = [] #Gantt Chart
+    gantt.append("0")
 
     while (t <= time):
 
@@ -204,14 +247,39 @@ def strf(): #Shortest Remaining Time First
 
         t += 1
 
-    print("Gantt")
-    print(0)
-    for x in gantt:
-        print(x)
+    print()
+    print("The Gantt Chart")
+    pgantt = "   ______"
+    for index, value in enumerate(gantt):
+        if index%2 != 0:
+                pgantt = pgantt + value + "______"
+    print(pgantt)
 
+    tgantt = ""
+    for index, value in enumerate(gantt):
+        if(index%2 == 0):
+            if(len(value) == 1):
+                if(index == 0):
+                    tgantt = tgantt + "     0" + value + "\t "
+                else:
+                    tgantt = tgantt + "    0" + value + "\t "
+            else:
+                tgantt = tgantt + "    " + value + "\t "
+    print(tgantt)
+
+    print()
+    print("The Table")
     print("Pro \t Bur \t Arr \t Com \t Res \t Wai \t Tur")
+    rAvr = 0
+    wAvr = 0
+    tAvr = 0
     for x in processes:
+        rAvr += x.response
+        wAvr += x.waiting
+        tAvr += x.turnaround
         print(x.name, "\t", x.burst, "\t", x.arrival, "\t", x.completion, "\t", x.response, "\t", x.waiting, "\t", x.turnaround)
+    print("AVERAGE-------------------------", rAvr/count, "\t", wAvr/count, "\t", tAvr/count)
+
 
 def pnp(): #Priority Non-Preemptive
     count = int(input("Enter the number of processes: "))
@@ -261,13 +329,34 @@ def pnp(): #Priority Non-Preemptive
         
         t += 1
 
-    print("Gantt")
+    print()
+    print("The Gantt Chart")
+    pgantt = "   ______"
     for x in gantt:
-        print(x.name, x.completion)
+        pgantt = pgantt + x.name + "______"
+    print(pgantt)
 
+    tgantt = "     00\t "
+    for y in gantt:
+        if(len(str(y.completion)) == 1):
+            tgantt = tgantt + "    0" + str(y.completion) + "\t "
+        else:
+            tgantt = tgantt + "    " + str(y.completion) + "\t "
+    print(tgantt)
+
+    print()
+    print("The Table")
     print("Pro \t Bur \t Arr \t Com \t Res \t Wai \t Tur")
+    rAvr = 0
+    wAvr = 0
+    tAvr = 0
     for x in processes:
+        rAvr += x.response
+        wAvr += x.waiting
+        tAvr += x.turnaround
         print(x.name, "\t", x.burst, "\t", x.arrival, "\t", x.completion, "\t", x.response, "\t", x.waiting, "\t", x.turnaround)
+    print("AVERAGE-------------------------", rAvr/count, "\t", wAvr/count, "\t", tAvr/count)
+
 
 def pp():
     count = int(input("Enter the number of processes: "))
@@ -290,6 +379,7 @@ def pp():
     ready = [] #ready queue
     active = None
     gantt = [] #Gantt Chart
+    gantt.append("0")
 
     while (t <= time):
         if (len(ready) != 0):
@@ -339,14 +429,39 @@ def pp():
         
         t += 1
 
-    print("Gantt")
-    print(0)
-    for x in gantt:
-        print(x)
+    print()
+    print("The Gantt Chart")
+    pgantt = "   ______"
+    for index, value in enumerate(gantt):
+        if index%2 != 0:
+                pgantt = pgantt + value + "______"
+    print(pgantt)
 
+    tgantt = ""
+    for index, value in enumerate(gantt):
+        if(index%2 == 0):
+            if(len(value) == 1):
+                if(index == 0):
+                    tgantt = tgantt + "     0" + value + "\t "
+                else:
+                    tgantt = tgantt + "    0" + value + "\t "
+            else:
+                tgantt = tgantt + "    " + value + "\t "
+    print(tgantt)
+
+    print()
+    print("The Table")
     print("Pro \t Bur \t Arr \t Com \t Res \t Wai \t Tur")
+    rAvr = 0
+    wAvr = 0
+    tAvr = 0
     for x in processes:
+        rAvr += x.response
+        wAvr += x.waiting
+        tAvr += x.turnaround
         print(x.name, "\t", x.burst, "\t", x.arrival, "\t", x.completion, "\t", x.response, "\t", x.waiting, "\t", x.turnaround)
+    print("AVERAGE-------------------------", rAvr/count, "\t", wAvr/count, "\t", tAvr/count)
+
 
 def rr():
     count = int(input("Enter the number of processes: "))
@@ -371,6 +486,7 @@ def rr():
     ready = [] #ready queue
     active = None
     gantt = [] #Gantt Chart
+    gantt.append("0")
 
     while (t <= time):
         if (len(ready) != 0):
@@ -419,14 +535,39 @@ def rr():
         t += 1
         q += 1
 
-    print("Gantt")
-    print(0)
-    for x in gantt:
-        print(x)
+    print()
+    print("The Gantt Chart")
+    pgantt = "   ______"
+    for index, value in enumerate(gantt):
+        if index%2 != 0:
+                pgantt = pgantt + value + "______"
+    print(pgantt)
 
+    tgantt = ""
+    for index, value in enumerate(gantt):
+        if(index%2 == 0):
+            if(len(value) == 1):
+                if(index == 0):
+                    tgantt = tgantt + "     0" + value + "\t "
+                else:
+                    tgantt = tgantt + "    0" + value + "\t "
+            else:
+                tgantt = tgantt + "    " + value + "\t "
+    print(tgantt)
+
+    print()
+    print("The Table")
     print("Pro \t Bur \t Arr \t Com \t Res \t Wai \t Tur")
+    rAvr = 0
+    wAvr = 0
+    tAvr = 0
     for x in processes:
+        rAvr += x.response
+        wAvr += x.waiting
+        tAvr += x.turnaround
         print(x.name, "\t", x.burst, "\t", x.arrival, "\t", x.completion, "\t", x.response, "\t", x.waiting, "\t", x.turnaround)
+    print("AVERAGE-------------------------", rAvr/count, "\t", wAvr/count, "\t", tAvr/count)
+
 
 def main():
     print("CPU Process Scheduling")
@@ -440,7 +581,6 @@ def main():
     print("5. Priority Scheduling (Preemptive)")
     print("6. Round Robin")
     choice = int(input("Your choice is: "))
-    print()
 
     while (choice < 1 or choice > 6):
         print("The input was invalid")
@@ -460,8 +600,10 @@ def main():
     if(choice == 6):
         rr()
     
+    print()
     print("CPU Process Scheduling")
     print("by: Ivan Baluyut & Nichol Famadico")
+    print()
 
 
 main()
