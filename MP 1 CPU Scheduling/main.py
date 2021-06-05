@@ -13,6 +13,10 @@ class Process:
     
 
 def fcfs(): #First Come First Serve
+    print("**********")
+    print()
+    print("FIRST-COME-FIRST SERVE ALGORITHM")
+    print()
     count = int(input("Enter the number of processes: "))
     i = 1
     time = 0
@@ -63,6 +67,10 @@ def fcfs(): #First Come First Serve
         t += 1
 
     print()
+    print("**********")
+    print()
+    print("FIRST-COME-FIRST SERVE ALGORITHM")
+    print()
     print("The Gantt Chart")
     pgantt = "   ______"
     for x in gantt:
@@ -92,6 +100,10 @@ def fcfs(): #First Come First Serve
 
 
 def sjf(): #Shortest Job First
+    print("**********")
+    print()
+    print("SHORTEST-JOB-FIRST ALGORITHM")
+    print()
     count = int(input("Enter the number of processes: "))
     i = 1
     time = 0
@@ -142,6 +154,10 @@ def sjf(): #Shortest Job First
         t += 1
 
     print()
+    print("**********")
+    print()
+    print("SHORTEST-JOB-FIRST ALGORITHM")
+    print()
     print("The Gantt Chart")
     pgantt = "   ______"
     for x in gantt:
@@ -171,6 +187,10 @@ def sjf(): #Shortest Job First
 
 
 def strf(): #Shortest Remaining Time First
+    print("**********")
+    print()
+    print("SHORTEST-REMAINING-TIME-FIRST ALGORITHM")
+    print()
     count = int(input("Enter the number of processes: "))
     i = 1
     time = 0
@@ -248,6 +268,10 @@ def strf(): #Shortest Remaining Time First
         t += 1
 
     print()
+    print("**********")
+    print()
+    print("SHORTEST-REMAINING-TIME-FIRST ALGORITHM")
+    print()
     print("The Gantt Chart")
     pgantt = "   ______"
     for index, value in enumerate(gantt):
@@ -282,6 +306,10 @@ def strf(): #Shortest Remaining Time First
 
 
 def pnp(): #Priority Non-Preemptive
+    print("**********")
+    print()
+    print("PRIORITY NON-PREEMPTIVE ALGORITHM")
+    print()
     count = int(input("Enter the number of processes: "))
     i = 1
     time = 0
@@ -330,6 +358,10 @@ def pnp(): #Priority Non-Preemptive
         t += 1
 
     print()
+    print("**********")
+    print()
+    print("PRIORITY NON-PREEMPTIVE ALGORITHM")
+    print()
     print("The Gantt Chart")
     pgantt = "   ______"
     for x in gantt:
@@ -359,6 +391,10 @@ def pnp(): #Priority Non-Preemptive
 
 
 def pp():
+    print("**********")
+    print()
+    print("PRIORITY PREEMPTIVE ALGORITHM")
+    print()
     count = int(input("Enter the number of processes: "))
     i = 1
     time = 0
@@ -430,6 +466,10 @@ def pp():
         t += 1
 
     print()
+    print("**********")
+    print()
+    print("PRIORITY PREEMPTIVE ALGORITHM")
+    print()
     print("The Gantt Chart")
     pgantt = "   ______"
     for index, value in enumerate(gantt):
@@ -464,6 +504,10 @@ def pp():
 
 
 def rr():
+    print("**********")
+    print()
+    print("ROUND-ROBIN ALGORITHM")
+    print()
     count = int(input("Enter the number of processes: "))
     quantum = int(input("Enter the time quantum: "))
     i = 1
@@ -536,6 +580,10 @@ def rr():
         q += 1
 
     print()
+    print("**********")
+    print()
+    print("ROUND-ROBIN ALGORITHM")
+    print()
     print("The Gantt Chart")
     pgantt = "   ______"
     for index, value in enumerate(gantt):
@@ -600,6 +648,8 @@ def main():
     if(choice == 6):
         rr()
     
+    print()
+    print("**********")
     print()
     print("CPU Process Scheduling")
     print("by: Ivan Baluyut & Nichol Famadico")

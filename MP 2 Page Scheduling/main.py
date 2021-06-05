@@ -38,17 +38,44 @@ def fifo(): #First In First Out
             rc += 1
             pc += 1
     
+    print()
+    print("FIRST-IN-FIRST-OUT ALGORITHM")
+    print()
+    pageArr = [[0 for i in range(len(reference))] for j in range(frames+1)]
+    for index, value in enumerate(reference):
+        pageArr[0][index] = value
+        for index1, value1 in enumerate(faults[index]):
+            if(value1 == ""):
+                pageArr[index1+1][index] = " "
+            else:
+                pageArr[index1+1][index] = value1
 
-    x = 0
-    string = ""
-    while x < len(reference):
-        string = str(reference[x]) + "\t\t"
-        for y in faults[x]:
-            string += str(y) + "\t"
-        
-        print(string)
-        x += 1
+    refLines = "Reference String"
+    pageLines = str(frames) + " Page Frames "
+    sepLines = ""
+    a,b,c =(0,0,0)
+    while a < (4*len(reference)) - 16:
+        refLines += "="
+        a += 1
+    while b < (4*len(reference)) - 14:
+        pageLines += "="
+        b += 1
+    while c < 4*len(reference):
+        sepLines += "-"
+        c += 1
+    
+    print(refLines)
+    for idx, val in enumerate(pageArr):
+        if(idx == 1):
+            print(sepLines)
+        for y in val:
+            print(y,end = "   ")
+        print()
+    print(pageLines)
+    print()
     print("The reference string resulted in", str(pc),"page faults.")
+    print()
+
 
 def lru(): #Least Recently Used
     frames = int(input("Enter the number of frames: "))
@@ -110,17 +137,44 @@ def lru(): #Least Recently Used
             rc += 1
             pc += 1
     
+    print()
+    print("LEAST RECENTLY USED ALGORITHM")
+    print()
+    pageArr = [[0 for i in range(len(reference))] for j in range(frames+1)]
+    for index, value in enumerate(reference):
+        pageArr[0][index] = value
+        for index1, value1 in enumerate(faults[index]):
+            if(value1 == ""):
+                pageArr[index1+1][index] = " "
+            else:
+                pageArr[index1+1][index] = value1
 
-    x = 0
-    string = ""
-    while x < len(reference):
-        string = str(reference[x]) + "\t\t"
-        for y in faults[x]:
-            string += str(y) + "\t"
-        
-        print(string)
-        x += 1
+    refLines = "Reference String"
+    pageLines = str(frames) + " Page Frames "
+    sepLines = ""
+    a,b,c =(0,0,0)
+    while a < (4*len(reference)) - 16:
+        refLines += "="
+        a += 1
+    while b < (4*len(reference)) - 14:
+        pageLines += "="
+        b += 1
+    while c < 4*len(reference):
+        sepLines += "-"
+        c += 1
+    
+    print(refLines)
+    for idx, val in enumerate(pageArr):
+        if(idx == 1):
+            print(sepLines)
+        for y in val:
+            print(y,end = "   ")
+        print()
+    print(pageLines)
+    print()
     print("The reference string resulted in", str(pc),"page faults.")
+    print()
+
 
 def lfu(): #Least Frequently Used
     frames = int(input("Enter the number of frames: "))
@@ -191,17 +245,44 @@ def lfu(): #Least Frequently Used
             rc += 1
             pc += 1
     
+    print()
+    print("LEAST FREQUENTLY USED")
+    print()
+    pageArr = [[0 for i in range(len(reference))] for j in range(frames+1)]
+    for index, value in enumerate(reference):
+        pageArr[0][index] = value
+        for index1, value1 in enumerate(faults[index]):
+            if(value1 == ""):
+                pageArr[index1+1][index] = " "
+            else:
+                pageArr[index1+1][index] = value1
 
-    x = 0
-    string = ""
-    while x < len(reference):
-        string = str(reference[x]) + "\t\t"
-        for y in faults[x]:
-            string += str(y) + "\t"
-        
-        print(string)
-        x += 1
+    refLines = "Reference String"
+    pageLines = str(frames) + " Page Frames "
+    sepLines = ""
+    a,b,c =(0,0,0)
+    while a < (4*len(reference)) - 16:
+        refLines += "="
+        a += 1
+    while b < (4*len(reference)) - 14:
+        pageLines += "="
+        b += 1
+    while c < 4*len(reference):
+        sepLines += "-"
+        c += 1
+    
+    print(refLines)
+    for idx, val in enumerate(pageArr):
+        if(idx == 1):
+            print(sepLines)
+        for y in val:
+            print(y,end = "   ")
+        print()
+    print(pageLines)
+    print()
     print("The reference string resulted in", str(pc),"page faults.")
+    print()
+
 
 def mfu():
     frames = int(input("Enter the number of frames: "))
@@ -272,17 +353,43 @@ def mfu():
             rc += 1
             pc += 1
     
+    print()
+    print("MOST FREQUENTLY USED")
+    pageArr = [[0 for i in range(len(reference))] for j in range(frames+1)]
+    for index, value in enumerate(reference):
+        pageArr[0][index] = value
+        for index1, value1 in enumerate(faults[index]):
+            if(value1 == ""):
+                pageArr[index1+1][index] = " "
+            else:
+                pageArr[index1+1][index] = value1
 
-    x = 0
-    string = ""
-    while x < len(reference):
-        string = str(reference[x]) + "\t\t"
-        for y in faults[x]:
-            string += str(y) + "\t"
-        
-        print(string)
-        x += 1
+    refLines = "Reference String"
+    pageLines = str(frames) + " Page Frames "
+    sepLines = ""
+    a,b,c =(0,0,0)
+    while a < (4*len(reference)) - 16:
+        refLines += "="
+        a += 1
+    while b < (4*len(reference)) - 14:
+        pageLines += "="
+        b += 1
+    while c < 4*len(reference):
+        sepLines += "-"
+        c += 1
+    
+    print(refLines)
+    for idx, val in enumerate(pageArr):
+        if(idx == 1):
+            print(sepLines)
+        for y in val:
+            print(y,end = "   ")
+        print()
+    print(pageLines)
+    print()
     print("The reference string resulted in", str(pc),"page faults.")
+    print()
+
 
 def main():
     print("Page Replacement Algorithm")
@@ -294,9 +401,9 @@ def main():
     print("3. Least-Frequently-Used")
     print("4. Most-Frequently-Used")
     choice = int(input("Your choice is: "))
-    print()
 
-    while (choice < 1 or choice > 6):
+    while (choice < 1 or choice > 4):
+        print()
         print("The input was invalid")
         choice = int(input("Your choice is: "))
     print()
@@ -311,9 +418,10 @@ def main():
         mfu()
     
     
-    
+    print()
     print("Page Replacement Algorithm")
     print("by: Ivan Baluyut & Nichol Famadico")
+    print()
 
 
 main()
