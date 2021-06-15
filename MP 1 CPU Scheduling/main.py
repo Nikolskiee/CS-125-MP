@@ -96,7 +96,7 @@ def fcfs(): #First Come First Serve
         wAvr += x.waiting
         tAvr += x.turnaround
         print(x.name, "\t", x.burst, "\t", x.arrival, "\t", x.completion, "\t", x.response, "\t", x.waiting, "\t", x.turnaround)
-    print("AVERAGE-------------------------", rAvr/count, "\t", wAvr/count, "\t", tAvr/count)
+    print("AVERAGE-------------------------", round(rAvr/count, 3), "\t", round(wAvr/count, 3), "\t", round(tAvr/count, 3))
 
 
 def sjf(): #Shortest Job First
@@ -183,7 +183,7 @@ def sjf(): #Shortest Job First
         wAvr += x.waiting
         tAvr += x.turnaround
         print(x.name, "\t", x.burst, "\t", x.arrival, "\t", x.completion, "\t", x.response, "\t", x.waiting, "\t", x.turnaround)
-    print("AVERAGE-------------------------", rAvr/count, "\t", wAvr/count, "\t", tAvr/count)
+    print("AVERAGE-------------------------", round(rAvr/count, 3), "\t", round(wAvr/count, 3), "\t", round(tAvr/count, 3))
 
 
 def strf(): #Shortest Remaining Time First
@@ -302,7 +302,7 @@ def strf(): #Shortest Remaining Time First
         wAvr += x.waiting
         tAvr += x.turnaround
         print(x.name, "\t", x.burst, "\t", x.arrival, "\t", x.completion, "\t", x.response, "\t", x.waiting, "\t", x.turnaround)
-    print("AVERAGE-------------------------", rAvr/count, "\t", wAvr/count, "\t", tAvr/count)
+    print("AVERAGE-------------------------", round(rAvr/count, 3), "\t", round(wAvr/count, 3), "\t", round(tAvr/count, 3))
 
 
 def pnp(): #Priority Non-Preemptive
@@ -387,7 +387,7 @@ def pnp(): #Priority Non-Preemptive
         wAvr += x.waiting
         tAvr += x.turnaround
         print(x.name, "\t", x.burst, "\t", x.arrival, "\t", x.completion, "\t", x.response, "\t", x.waiting, "\t", x.turnaround)
-    print("AVERAGE-------------------------", rAvr/count, "\t", wAvr/count, "\t", tAvr/count)
+    print("AVERAGE-------------------------", round(rAvr/count, 3), "\t", round(wAvr/count, 3), "\t", round(tAvr/count, 3))
 
 
 def pp():
@@ -500,7 +500,7 @@ def pp():
         wAvr += x.waiting
         tAvr += x.turnaround
         print(x.name, "\t", x.burst, "\t", x.arrival, "\t", x.completion, "\t", x.response, "\t", x.waiting, "\t", x.turnaround)
-    print("AVERAGE-------------------------", rAvr/count, "\t", wAvr/count, "\t", tAvr/count)
+    print("AVERAGE-------------------------", round(rAvr/count, 3), "\t", round(wAvr/count, 3), "\t", round(tAvr/count, 3))
 
 
 def rr():
@@ -614,12 +614,14 @@ def rr():
         wAvr += x.waiting
         tAvr += x.turnaround
         print(x.name, "\t", x.burst, "\t", x.arrival, "\t", x.completion, "\t", x.response, "\t", x.waiting, "\t", x.turnaround)
-    print("AVERAGE-------------------------", rAvr/count, "\t", wAvr/count, "\t", tAvr/count)
+    print("AVERAGE-------------------------", round(rAvr/count, 3), "\t", round(wAvr/count, 3), "\t", round(tAvr/count, 3))
 
 
 def main():
+    print()
     print("CPU Process Scheduling")
     print("by: Ivan Baluyut & Nichol Famadico")
+    print()
     choice = 0
     print("Pick a CPU Scheduling Algorithm")
     print("1. First-Come First-Served")
@@ -628,9 +630,11 @@ def main():
     print("4. Priority Scheduling (Non-Preemptive)")
     print("5. Priority Scheduling (Preemptive)")
     print("6. Round Robin")
+    print("=======================================")
     choice = int(input("Your choice is: "))
 
     while (choice < 1 or choice > 6):
+        print()
         print("The input was invalid")
         choice = int(input("Your choice is: "))
     print()

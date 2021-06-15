@@ -392,14 +392,17 @@ def mfu():
 
 
 def main():
+    print()
     print("Page Replacement Algorithm")
     print("by: Ivan Baluyut & Nichol Famadico")
+    print()
     choice = 0
     print("Pick a Page Replacement Algorithm")
     print("1. First-In-First-Out")
     print("2. Least-Recently-Used")
     print("3. Least-Frequently-Used")
     print("4. Most-Frequently-Used")
+    print("=================================")
     choice = int(input("Your choice is: "))
 
     while (choice < 1 or choice > 4):
