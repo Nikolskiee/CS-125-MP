@@ -27,7 +27,7 @@ def fcfs(): #First Come First Serve
         priority = i
         arrival = int(input("Arrival time: "))
         burst = int(input("Burst time: "))
-        time += burst
+        time += (burst + arrival) * (burst + arrival)
         
         process = Process(name, priority, arrival, burst)
         processes.append(process)
@@ -114,7 +114,7 @@ def sjf(): #Shortest Job First
         priority = i
         arrival = int(input("Arrival time: "))
         burst = int(input("Burst time: "))
-        time += burst
+        time += (burst + arrival) * (burst + arrival)
         
         process = Process(name, priority, arrival, burst)
         processes.append(process)
@@ -201,7 +201,7 @@ def strf(): #Shortest Remaining Time First
         priority = i
         arrival = int(input("Arrival time: "))
         burst = int(input("Burst time: "))
-        time += burst
+        time += (burst + arrival) * (burst + arrival)
         
         process = Process(name, priority, arrival, burst)
         processes.append(process)
@@ -320,7 +320,7 @@ def pnp(): #Priority Non-Preemptive
         priority = int(input("Priority: "))
         arrival = int(input("Arrival time: "))
         burst = int(input("Burst time: "))
-        time += burst
+        time += (burst + arrival) * (burst + arrival)
         
         process = Process(name, priority, arrival, burst)
         processes.append(process)
@@ -405,7 +405,7 @@ def pp():
         priority = int(input("Priority: "))
         arrival = int(input("Arrival time: "))
         burst = int(input("Burst time: "))
-        time += burst
+        time += (burst + arrival) * (burst + arrival)
         
         process = Process(name, priority, arrival, burst)
         processes.append(process)
@@ -519,7 +519,7 @@ def rr():
         priority = i
         arrival = int(input("Arrival time: "))
         burst = int(input("Burst time: "))
-        time += burst
+        time += (burst + arrival) * (burst + arrival)
         
         process = Process(name, priority, arrival, burst)
         processes.append(process)
