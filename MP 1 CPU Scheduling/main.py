@@ -73,16 +73,32 @@ def fcfs(): #First Come First Serve
     print()
     print("The Gantt Chart")
     pgantt = "   ______"
-    for x in gantt:
-        pgantt = pgantt + x.name + "______"
+    for index,value in enumerate(gantt):
+        if index == 0 and value.arrival != 0:
+            pgantt = pgantt + "--______"
+        if index != 0 and value.completion - value.burst != gantt[index-1].completion:
+            pgantt = pgantt + "--______"
+        pgantt = pgantt + value.name + "______"
     print(pgantt)
 
     tgantt = "     00\t "
-    for y in gantt:
-        if(len(str(y.completion)) == 1):
-            tgantt = tgantt + "    0" + str(y.completion) + "\t "
+    for index,value in enumerate(gantt):
+        if index == 0 and value.arrival != 0:
+            if(len(str(value.arrival)) == 1):
+                tgantt = tgantt + "    0" + str(value.arrival) + "\t "
+            else:
+                tgantt = tgantt + "    " + str(value.arrival) + "\t "
+
+        if index != 0 and value.completion - value.burst != gantt[index-1].completion:
+            if(len(str(value.completion - value.burst)) == 1):
+                tgantt = tgantt + "    0" + str(value.completion - value.burst) + "\t "
+            else:
+                tgantt = tgantt + "    " + str(value.completion - value.burst) + "\t "
+
+        if(len(str(value.completion)) == 1):
+            tgantt = tgantt + "    0" + str(value.completion) + "\t "
         else:
-            tgantt = tgantt + "    " + str(y.completion) + "\t "
+            tgantt = tgantt + "    " + str(value.completion) + "\t "
     print(tgantt)
 
     print()
@@ -96,7 +112,11 @@ def fcfs(): #First Come First Serve
         wAvr += x.waiting
         tAvr += x.turnaround
         print(x.name, "\t", x.burst, "\t", x.arrival, "\t", x.completion, "\t", x.response, "\t", x.waiting, "\t", x.turnaround)
-    print("AVERAGE-------------------------", round(rAvr/count, 3), "\t", round(wAvr/count, 3), "\t", round(tAvr/count, 3))
+    
+    print()
+    print("Average Response Time---->", round(rAvr/count, 4))
+    print("Average Waiting Time----->", round(wAvr/count, 4))
+    print("Average Turnaround Time-->", round(tAvr/count, 4))
 
 
 def sjf(): #Shortest Job First
@@ -160,16 +180,32 @@ def sjf(): #Shortest Job First
     print()
     print("The Gantt Chart")
     pgantt = "   ______"
-    for x in gantt:
-        pgantt = pgantt + x.name + "______"
+    for index,value in enumerate(gantt):
+        if index == 0 and value.arrival != 0:
+            pgantt = pgantt + "--______"
+        if index != 0 and value.completion - value.burst != gantt[index-1].completion:
+            pgantt = pgantt + "--______"
+        pgantt = pgantt + value.name + "______"
     print(pgantt)
 
     tgantt = "     00\t "
-    for y in gantt:
-        if(len(str(y.completion)) == 1):
-            tgantt = tgantt + "    0" + str(y.completion) + "\t "
+    for index,value in enumerate(gantt):
+        if index == 0 and value.arrival != 0:
+            if(len(str(value.arrival)) == 1):
+                tgantt = tgantt + "    0" + str(value.arrival) + "\t "
+            else:
+                tgantt = tgantt + "    " + str(value.arrival) + "\t "
+
+        if index != 0 and value.completion - value.burst != gantt[index-1].completion:
+            if(len(str(value.completion - value.burst)) == 1):
+                tgantt = tgantt + "    0" + str(value.completion - value.burst) + "\t "
+            else:
+                tgantt = tgantt + "    " + str(value.completion - value.burst) + "\t "
+
+        if(len(str(value.completion)) == 1):
+            tgantt = tgantt + "    0" + str(value.completion) + "\t "
         else:
-            tgantt = tgantt + "    " + str(y.completion) + "\t "
+            tgantt = tgantt + "    " + str(value.completion) + "\t "
     print(tgantt)
 
     print()
@@ -183,7 +219,11 @@ def sjf(): #Shortest Job First
         wAvr += x.waiting
         tAvr += x.turnaround
         print(x.name, "\t", x.burst, "\t", x.arrival, "\t", x.completion, "\t", x.response, "\t", x.waiting, "\t", x.turnaround)
-    print("AVERAGE-------------------------", round(rAvr/count, 3), "\t", round(wAvr/count, 3), "\t", round(tAvr/count, 3))
+
+    print()
+    print("Average Response Time---->", round(rAvr/count, 4))
+    print("Average Waiting Time----->", round(wAvr/count, 4))
+    print("Average Turnaround Time-->", round(tAvr/count, 4))
 
 
 def strf(): #Shortest Remaining Time First
@@ -248,7 +288,6 @@ def strf(): #Shortest Remaining Time First
 
                     if(active.remaining == active.burst): 
                         active.response = (t - active.arrival)
-
             
         if (len(ready) != 0 and active == None):
             active = ready[0]
@@ -265,6 +304,9 @@ def strf(): #Shortest Remaining Time First
             if(active.remaining == active.burst): 
                 active.response = (t - active.arrival)
 
+        if len(ready) == 0 and active == None:
+            gantt.append("i" + str(t+1))
+
         t += 1
 
     print()
@@ -275,13 +317,27 @@ def strf(): #Shortest Remaining Time First
     print("The Gantt Chart")
     pgantt = "   ______"
     for index, value in enumerate(gantt):
-        if index%2 != 0:
+        if index+1 < len(gantt):
+            if value[0] == "i" and gantt[index+1][0] == "P":
+                pgantt = pgantt + "--______"
+            if value[0] == "P":
                 pgantt = pgantt + value + "______"
     print(pgantt)
 
     tgantt = ""
     for index, value in enumerate(gantt):
-        if(index%2 == 0):
+        if index+1 < len(gantt):
+            if value[0] == "i" and gantt[index+1][0] == "P":
+                idle = ""
+                for x in value:
+                    if x != "i":
+                        idle += x
+                if len(idle) == 1:
+                    tgantt = tgantt + "    0" + idle + "\t "
+                else:
+                    tgantt = tgantt + "    " + idle + "\t "
+
+        if value[0].isnumeric():
             if(len(value) == 1):
                 if(index == 0):
                     tgantt = tgantt + "     0" + value + "\t "
@@ -302,7 +358,11 @@ def strf(): #Shortest Remaining Time First
         wAvr += x.waiting
         tAvr += x.turnaround
         print(x.name, "\t", x.burst, "\t", x.arrival, "\t", x.completion, "\t", x.response, "\t", x.waiting, "\t", x.turnaround)
-    print("AVERAGE-------------------------", round(rAvr/count, 3), "\t", round(wAvr/count, 3), "\t", round(tAvr/count, 3))
+
+    print()
+    print("Average Response Time---->", round(rAvr/count, 4))
+    print("Average Waiting Time----->", round(wAvr/count, 4))
+    print("Average Turnaround Time-->", round(tAvr/count, 4))
 
 
 def pnp(): #Priority Non-Preemptive
@@ -364,16 +424,32 @@ def pnp(): #Priority Non-Preemptive
     print()
     print("The Gantt Chart")
     pgantt = "   ______"
-    for x in gantt:
-        pgantt = pgantt + x.name + "______"
+    for index,value in enumerate(gantt):
+        if index == 0 and value.arrival != 0:
+            pgantt = pgantt + "--______"
+        if index != 0 and value.completion - value.burst != gantt[index-1].completion:
+            pgantt = pgantt + "--______"
+        pgantt = pgantt + value.name + "______"
     print(pgantt)
 
     tgantt = "     00\t "
-    for y in gantt:
-        if(len(str(y.completion)) == 1):
-            tgantt = tgantt + "    0" + str(y.completion) + "\t "
+    for index,value in enumerate(gantt):
+        if index == 0 and value.arrival != 0:
+            if(len(str(value.arrival)) == 1):
+                tgantt = tgantt + "    0" + str(value.arrival) + "\t "
+            else:
+                tgantt = tgantt + "    " + str(value.arrival) + "\t "
+
+        if index != 0 and value.completion - value.burst != gantt[index-1].completion:
+            if(len(str(value.completion - value.burst)) == 1):
+                tgantt = tgantt + "    0" + str(value.completion - value.burst) + "\t "
+            else:
+                tgantt = tgantt + "    " + str(value.completion - value.burst) + "\t "
+
+        if(len(str(value.completion)) == 1):
+            tgantt = tgantt + "    0" + str(value.completion) + "\t "
         else:
-            tgantt = tgantt + "    " + str(y.completion) + "\t "
+            tgantt = tgantt + "    " + str(value.completion) + "\t "
     print(tgantt)
 
     print()
@@ -387,7 +463,11 @@ def pnp(): #Priority Non-Preemptive
         wAvr += x.waiting
         tAvr += x.turnaround
         print(x.name, "\t", x.burst, "\t", x.arrival, "\t", x.completion, "\t", x.response, "\t", x.waiting, "\t", x.turnaround)
-    print("AVERAGE-------------------------", round(rAvr/count, 3), "\t", round(wAvr/count, 3), "\t", round(tAvr/count, 3))
+
+    print()
+    print("Average Response Time---->", round(rAvr/count, 4))
+    print("Average Waiting Time----->", round(wAvr/count, 4))
+    print("Average Turnaround Time-->", round(tAvr/count, 4))
 
 
 def pp():
@@ -463,6 +543,9 @@ def pp():
             if(active.burst == active.remaining): 
                 active.response = (t - active.arrival)
         
+        if len(ready) == 0 and active == None:
+            gantt.append("i" + str(t+1))
+        
         t += 1
 
     print()
@@ -473,13 +556,27 @@ def pp():
     print("The Gantt Chart")
     pgantt = "   ______"
     for index, value in enumerate(gantt):
-        if index%2 != 0:
+        if index+1 < len(gantt):
+            if value[0] == "i" and gantt[index+1][0] == "P":
+                pgantt = pgantt + "--______"
+            if value[0] == "P":
                 pgantt = pgantt + value + "______"
     print(pgantt)
 
     tgantt = ""
     for index, value in enumerate(gantt):
-        if(index%2 == 0):
+        if index+1 < len(gantt):
+            if value[0] == "i" and gantt[index+1][0] == "P":
+                idle = ""
+                for x in value:
+                    if x != "i":
+                        idle += x
+                if len(idle) == 1:
+                    tgantt = tgantt + "    0" + idle + "\t "
+                else:
+                    tgantt = tgantt + "    " + idle + "\t "
+
+        if value[0].isnumeric():
             if(len(value) == 1):
                 if(index == 0):
                     tgantt = tgantt + "     0" + value + "\t "
@@ -500,7 +597,11 @@ def pp():
         wAvr += x.waiting
         tAvr += x.turnaround
         print(x.name, "\t", x.burst, "\t", x.arrival, "\t", x.completion, "\t", x.response, "\t", x.waiting, "\t", x.turnaround)
-    print("AVERAGE-------------------------", round(rAvr/count, 3), "\t", round(wAvr/count, 3), "\t", round(tAvr/count, 3))
+
+    print()
+    print("Average Response Time---->", round(rAvr/count, 4))
+    print("Average Waiting Time----->", round(wAvr/count, 4))
+    print("Average Turnaround Time-->", round(tAvr/count, 4))
 
 
 def rr():
@@ -576,6 +677,9 @@ def rr():
             
             q = 0
         
+        if len(ready) == 0 and active == None:
+            gantt.append("i" + str(t+1))
+
         t += 1
         q += 1
 
@@ -587,13 +691,27 @@ def rr():
     print("The Gantt Chart")
     pgantt = "   ______"
     for index, value in enumerate(gantt):
-        if index%2 != 0:
+        if index+1 < len(gantt):
+            if value[0] == "i" and gantt[index+1][0] == "P":
+                pgantt = pgantt + "--______"
+            if value[0] == "P":
                 pgantt = pgantt + value + "______"
     print(pgantt)
 
     tgantt = ""
     for index, value in enumerate(gantt):
-        if(index%2 == 0):
+        if index+1 < len(gantt):
+            if value[0] == "i" and gantt[index+1][0] == "P":
+                idle = ""
+                for x in value:
+                    if x != "i":
+                        idle += x
+                if len(idle) == 1:
+                    tgantt = tgantt + "    0" + idle + "\t "
+                else:
+                    tgantt = tgantt + "    " + idle + "\t "
+
+        if value[0].isnumeric():
             if(len(value) == 1):
                 if(index == 0):
                     tgantt = tgantt + "     0" + value + "\t "
@@ -614,7 +732,11 @@ def rr():
         wAvr += x.waiting
         tAvr += x.turnaround
         print(x.name, "\t", x.burst, "\t", x.arrival, "\t", x.completion, "\t", x.response, "\t", x.waiting, "\t", x.turnaround)
-    print("AVERAGE-------------------------", round(rAvr/count, 3), "\t", round(wAvr/count, 3), "\t", round(tAvr/count, 3))
+
+    print()
+    print("Average Response Time---->", round(rAvr/count, 4))
+    print("Average Waiting Time----->", round(wAvr/count, 4))
+    print("Average Turnaround Time-->", round(tAvr/count, 4))
 
 
 def main():
